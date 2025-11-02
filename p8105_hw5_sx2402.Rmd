@@ -1,0 +1,12 @@
+---
+title: "p8105_hw5_sx2402"
+author: "Eric Xu"
+date: "2025-11-02"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(skimr)
+```
