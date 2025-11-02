@@ -10,3 +10,42 @@ library(tidyverse)
 library(knitr)
 library(skimr)
 ```
+
+## Problem 1
+
+1. Creating a function generating random birthdays.
+```{r function1}
+has_shared_birthday <- function(n) {
+  if (!is.numeric(n)) {
+    stop("Argument n should be numeric")
+  } else {
+    birthdays = sample(1:365, size = n, replace = TRUE)
+    return(length(unique(birthdays)) < n)
+  }
+}
+```
+
+2. Simulating and plotting.
+```{r Q1 run}
+n_sim = 10000
+group_sizes = 2:50
+results = tibble()
+for (n in group_sizes) {
+  shared_vector <- logical(n_sim)
+  
+  for (i in 1:n_sim) {
+    shared_vector[i] <- has_shared_birthday(n)
+  }
+  prob_shared <- mean(shared_vector)
+  
+  results <- bind_rows(results, tibble(group_size = n, prob_shared = prob_shared))
+}
+
+results |> ggplot(aes(x=group_size, y = prob_shared))+geom_point(size = 2, color = "black")+geom_smooth(method = 'loess',formula = y~x, alpha = 0.8, linewidth = 0.6)
+```
+
+## Problem 2
+```{r Q2 function}
+
+```
+
